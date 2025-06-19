@@ -1,7 +1,14 @@
-const SUPER_ADMIN_PASSWORD = "embeovl";
-const ADMIN_PASSWORD = "emsieubeo";
+const express = require("express");
+
+// Tạo web server giữ app sống trên Render
+const app = express();
+app.get("/", (req, res) => res.send("Haxball room is running!"));
+app.listen(process.env.PORT || 3000);
+
+const SUPER_ADMIN_PASSWORD = "taolabo";
+const ADMIN_PASSWORD = "taolame";
 const MODE = "pick"; // can be "rand" or "pick"
-const ROOM_NAME = `vao rum bo may di (${MODE})`;
+const ROOM_NAME = `[⚽𝘼𝙪𝙩𝙤 𝙍𝙤𝙤𝙢] 5v5 siêu lag (${MODE})`;
 const PUBLIC = true;
 const ACTIVITY_TIMEOUT = 10;
 const AFK_TIMEOUT = 10 * 60;
@@ -23,7 +30,7 @@ const LATE_SUBSTITUTION_PERIOD = 30;
 const MAX_AFK_PLAYERS = 3;
 const MAX_SIZE_ADJUSTMENT_RATIO = 0.3;
 const SAVE_RECORDINGS = true;
-const MAX_WARNINGS_PER_PLAYER = 3;
+const MAX_WARNINGS_PER_PLAYER = 6;
 const VIOLATION_BAN_PERIOD = 3;
 const YELLOW_BAN_PERIOD = 10;
 const RED = 0xFA3E3E;
@@ -70,15 +77,15 @@ const GOALKEEPER_COLORS = {
 };
 const GOAL_COMMENTARIES = {
   "-3": [
-    "Một bàn thắng danh dự!",
-    "Một niềm an ủi nhỏ nhoi cho đội bóng.",
+    "Đm bình tĩnh lật được",
+    "Chưa kết thúc đâu anh em ạ",
   ],
   "-2": [
-    "Liệu sẽ có một cuộc lội ngược dòng xảy ra?",
+    "Vãi ò đéo ổn rồi, khả lăng cao là lật kèo!",
     "Một tia hy vọng vừa được nhen nhóm!",
     "Tỉ số đã được rút ngắn còn 2 bàn.",
-    "Họ chưa chịu đầu hàng!",
-    "Liệu đây có phải là sự khởi đầu của một điều kỳ diệu?",
+    "Họ chưa chịu chui háng",
+    "NHÌN ANH EM TAO LẬT KÈO NÀY!",
   ],
   "-1": [
     "Cách biệt chỉ còn là 1 bàn mong manh!",
@@ -137,32 +144,32 @@ const WINNING_GOAL_COMMENTARIES = [
   "MỘT KHOẢNH KHẮC NGÔI SAO",
 ];
 const SCORER_COMMENTARIES = {
-  "1": "Pha lập công do công của",
-  "2": "Cú đúp dành cho",
-  "3": "Hattrick đến từ",
-  "4": "THẬT KHÔNG THỂ TIN ĐƯỢC, poker cho",
-  "5": "REPOCKER CHO NGƯỜI NGOÀI HÀNH TINH",
+  "1": "Một pha bú liếm của",
+  "2": "Bú vội 2 bàn đến từ",
+  "3": "Hattrick 3 bát cơm của",
+  "4": "vl ghi hẳn 4 bàn đến từ",
+  "5": "CÁI LOZ GÌ ĐANG XẢY RA??,5 BÀN CHO",
 };
 const PENALTY_GOAL_COMMENTARIES = [
   "Rất lạnh lùng và vô cùng bản lĩnh",
   "Rất quyết đoán, một cú sút với lực căng",
-  "Vàoooo, tỉ số luân lưu đã được nâng lên",
+  "Vàoooo, đm thằng thủ môn gà vl",
   "Quá đơn giản và nhẹ nhàng",
-  "Chính xác đến từng centimet",
+  "Một pha bắt bóng quá ngu đến từ vị trí thủ môn",
 ];
 const PENALTY_MISS_COMMENTARIES = [
   "Áp lực quá lớn đã khiến cho cầu thủ thực hiện quả luân lưu không thành công",
-  "Không vàooooooo, rất đáng tiếc",
+  "Không vàooooooo, con chó này đá ngu quá",
   "Không vàooooo, cái duyên trên chấm 11 mét đã không xuất hiện ngày hôm nay",
-  "Không vàooo, quá thiếu may mắn",
+  "Không vàooo, đm biết tao là thủ môn hay nhất Haxball ko??",
 ];
-const DISCORD_WEBHOOK = null;
-const STADIUM_TRAINING = '{"name":"Practice","width":420,"height":200,"spawnDistance":170,"bg":{"type":"grass","width":370,"height":170,"kickOffRadius":75,"cornerRadius":0},"vertexes":[{"x":-370,"y":170,"trait":"ballArea"},{"x":-370,"y":-170,"trait":"ballArea"},{"x":370,"y":170,"trait":"ballArea"},{"x":370,"y":-170,"trait":"ballArea"},{"x":0,"y":200,"trait":"kickOffBarrier"},{"x":0,"y":-200,"trait":"kickOffBarrier"}],"segments":[],"goals":[],"discs":[],"planes":[{"normal":[0,1],"dist":-170,"trait":"ballArea","_data":{"extremes":{"normal":[0,1],"dist":-170,"canvas_rect":[-661,-212,661,213],"a":[-661,-170],"b":[661,-170]}}},{"normal":[0,-1],"dist":-170,"trait":"ballArea","_data":{"extremes":{"normal":[0,-1],"dist":-170,"canvas_rect":[-661,-212,661,213],"a":[-661,170],"b":[661,170]}}},{"normal":[0,1],"dist":-200,"bCoef":0.1,"_data":{"extremes":{"normal":[0,1],"dist":-200,"canvas_rect":[-661,-212,661,213],"a":[-661,-200],"b":[661,-200]}}},{"normal":[0,-1],"dist":-200,"bCoef":0.1,"_data":{"extremes":{"normal":[0,-1],"dist":-200,"canvas_rect":[-661,-212,661,213],"a":[-661,200],"b":[661,200]}}},{"normal":[1,0],"dist":-420,"bCoef":0.1,"_data":{"extremes":{"normal":[1,0],"dist":-420,"canvas_rect":[-661,-212,661,213],"a":[-420,-212],"b":[-420,213]}}},{"normal":[-1,0],"dist":-420,"bCoef":0.1,"_data":{"extremes":{"normal":[-1,0],"dist":-420,"canvas_rect":[-661,-212,661,213],"a":[420,-212],"b":[420,213]}}},{"normal":[1,0],"dist":-370,"bCoef":1,"cMask":["ball"],"trait":"ballArea","_data":{"extremes":{"normal":[1,0],"dist":-370,"canvas_rect":[-661,-212,661,213],"a":[-370,-212],"b":[-370,213]}}},{"normal":[-1,0],"dist":-370,"bCoef":1,"cMask":["ball"],"trait":"ballArea","_data":{"extremes":{"normal":[-1,0],"dist":-370,"canvas_rect":[-661,-212,661,213],"a":[370,-212],"b":[370,213]}}}],"traits":{"ballArea":{"vis":false,"bCoef":1,"cMask":["ball"]},"goalPost":{"radius":8,"invMass":0,"bCoef":0.5},"goalNet":{"vis":true,"bCoef":0.1,"cMask":["ball"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]}},"joints":[],"redSpawnPoints":[],"blueSpawnPoints":[],"ballPhysics":{"radius":6.4},"playerPhysics":{"kickStrength":6.7},"canBeStored":false}';
-const STADIUM_1v1 = '{"name":"Futsal 2v2 by Wein","width":420,"height":200,"spawnDistance":180,"bg":{"type":"hockey","width":368,"height":171,"kickOffRadius":65,"cornerRadius":0},"vertexes":[{"x":-368,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-368,"y":65,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-368,"y":-65,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-368,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":65,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":-65,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":0,"y":65,"trait":"kickOffBarrier"},{"x":0,"y":-65,"trait":"line"},{"x":-384,"y":-65,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":384,"y":-65,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":-384,"y":65,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":384,"y":65,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":368,"y":171,"bCoef":1,"trait":"ballArea"},{"x":368,"y":-171,"bCoef":1,"trait":"ballArea"},{"x":0,"y":171,"bCoef":0,"trait":"line"},{"x":0,"y":-171,"bCoef":0,"trait":"line"},{"x":0,"y":65,"trait":"kickOffBarrier"},{"x":0,"y":-65,"trait":"kickOffBarrier"},{"x":377,"y":-65,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":377,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-377,"y":-65,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":-377,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-377,"y":65,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":-377,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":377,"y":65,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":377,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":0,"y":199,"trait":"kickOffBarrier"},{"x":0,"y":65,"trait":"kickOffBarrier"},{"x":0,"y":-65,"trait":"kickOffBarrier"},{"x":0,"y":-199,"trait":"kickOffBarrier"}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":4,"v1":5,"trait":"ballArea"},{"v0":6,"v1":7,"trait":"ballArea"},{"v0":8,"v1":9,"curve":180,"cGroup":["blueKO"],"trait":"kickOffBarrier"},{"v0":8,"v1":9,"curve":-180,"cGroup":["redKO"],"trait":"kickOffBarrier"},{"v0":2,"v1":10,"curve":-35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":6,"v1":11,"curve":35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":1,"v1":12,"curve":35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":5,"v1":13,"curve":-35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":10,"v1":12,"curve":-35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["ball"],"trait":"goalNet","x":-585},{"v0":11,"v1":13,"curve":35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["ball"],"trait":"goalNet","x":585},{"v0":1,"v1":0,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-368},{"v0":5,"v1":4,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":368},{"v0":2,"v1":3,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-368},{"v0":6,"v1":7,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":368},{"v0":0,"v1":14,"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","y":171},{"v0":3,"v1":15,"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","y":-171},{"v0":16,"v1":17,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":9,"v1":8,"curve":-180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":19,"v1":18,"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":2,"v1":1,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":6,"v1":5,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":20,"v1":21,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":330},{"v0":22,"v1":23,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-330},{"v0":24,"v1":25,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-330},{"v0":26,"v1":27,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":330},{"v0":28,"v1":29,"trait":"kickOffBarrier"},{"v0":30,"v1":31,"trait":"kickOffBarrier"}],"goals":[{"p0":[-377,-65],"p1":[-377,65],"team":"red"},{"p0":[377,65],"p1":[377,-65],"team":"blue"}],"discs":[{"radius":5,"pos":[-368,65],"color":"FFFFFF","trait":"goalPost"},{"radius":5,"pos":[-368,-65],"color":"FFFFFF","trait":"goalPost"},{"radius":5,"pos":[368,65],"color":"FFFFFF","trait":"goalPost"},{"radius":5,"pos":[368,-65],"color":"FFFFFF","trait":"goalPost"},{"radius":3,"pos":[-384,65],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}},{"radius":3,"pos":[-384,-65],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}},{"radius":3,"pos":[384,65],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}},{"radius":3,"pos":[384,-65],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}},{"radius":3,"pos":[368,171],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}},{"radius":3,"pos":[-368,171],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}},{"radius":3,"pos":[-368,-171],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}},{"radius":3,"pos":[368,-171],"color":"FFFFFF","bCoef":0,"cMask":[""],"cGroup":["ball","red","blue"],"trait":"goalPost","_data":{"mirror":[]}}],"planes":[{"normal":[0,1],"dist":-171,"trait":"ballArea","_data":{"extremes":{"normal":[0,1],"dist":-171,"canvas_rect":[-702,-211,702,211],"a":[-702,-171],"b":[702,-171]}}},{"normal":[0,-1],"dist":-171,"trait":"ballArea","_data":{"extremes":{"normal":[0,-1],"dist":-171,"canvas_rect":[-702,-211,702,211],"a":[-702,171],"b":[702,171]}}},{"normal":[0,1],"dist":-200,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,1],"dist":-200,"canvas_rect":[-702,-211,702,211],"a":[-702,-200],"b":[702,-200]}}},{"normal":[0,-1],"dist":-200,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,-1],"dist":-200,"canvas_rect":[-702,-211,702,211],"a":[-702,200],"b":[702,200]}}},{"normal":[1,0],"dist":-420,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[1,0],"dist":-420,"canvas_rect":[-702,-211,702,211],"a":[-420,-211],"b":[-420,211]}}},{"normal":[-1,0],"dist":-420,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[-1,0],"dist":-420,"canvas_rect":[-702,-211,702,211],"a":[420,-211],"b":[420,211]}}}],"traits":{"ballArea":{"vis":false,"bCoef":1,"cMask":["ball"]},"goalPost":{"radius":8,"invMass":0,"bCoef":1},"goalNet":{"vis":true,"bCoef":0.1,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"cMask":[""]},"arco":{"radius":2,"cMask":["n\/d"],"color":"cccccc"}},"playerPhysics":{"acceleration":0.11,"kickingAcceleration":0.1,"kickStrength":7,"radius":15,"bCoef":0.5,"invMass":0.5,"damping":0.96,"cGroup":["red","blue"],"gravity":[0,0],"kickingDamping":0.96,"kickback":0},"ballPhysics":{"radius":6.4,"color":"EAFF00","bCoef":0.5,"cMask":["all"],"damping":0.99,"invMass":1,"gravity":[0,0],"cGroup":["ball"]},"joints":[],"redSpawnPoints":[],"blueSpawnPoints":[],"canBeStored":true,"cameraWidth":0,"cameraHeight":0,"maxViewWidth":0,"cameraFollow":"ball","kickOffReset":"partial"}';
+const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1384917349685268560/6WORwiIUi1mmggjhrDt44d4Zi_lM_0r2arzw88f8VHuMrhSH47h4kth4QP-l5nJ0lwnF";
+const STADIUM_TRAINING = '{"name": "VietHaxCup | Solo","width": 250,"height": 250,"cameraWidth": 0,"cameraHeight": 0,"maxViewWidth": 0,"cameraFollow": "ball","spawnDistance": 170,"redSpawnPoints": [],"blueSpawnPoints": [],"kickOffReset": "partial","bg": {"color": "718C5A","type": "grass","height": 150,"width": 150,"cornerRadius": 0,"kickOffRadius": 0},"traits": {"ballArea": {"vis": false,"bCoef": 1,"cMask": ["ball"]},"goalPost": {"radius": 8,"invMass": 0,"bCoef": 0.5},"goalNet": {"vis": true,"bCoef": 0.1,"cMask": ["ball"]},"kickOffBarrier": {"vis": false,"bCoef": 0.1,"cGroup": ["redKO","blueKO"],"cMask": ["red","blue"]},"line": {"vis": true,"bCoef": 0,"cMask": [""]}}, "vertexes": [ { "x": 6, "y": 28, "bCoef": 0, "trait": "line", "color": "ffffff" }, { "x": 53, "y": -27, "bCoef": 0, "trait": "line", "color": "ffffff", "curve": -175 }, { "x": 50, "y": 28, "bCoef": 0, "trait": "line", "color": "ffffff", "curve": -175 }, { "x": 50, "y": 25, "bCoef": 0, "trait": "line", "color": "454C5E", "curve": 175 }, { "x": 53, "y": -24, "bCoef": 0, "trait": "line", "color": "454C5E", "curve": 175 }, { "x": -10, "y": -27, "bCoef": 0, "trait": "line", "vis": true }, { "x": -22, "y": 28, "bCoef": 0, "trait": "line", "vis": true }, { "x": -17, "y": 0, "bCoef": 0, "trait": "line" }, { "x": 11, "y": 0,"bCoef": 0,"trait": "line" }, { "x": -7,"y": -27, "bCoef": 0, "trait": "line", "curve": 0 }, { "x": -19,"y": 28,"bCoef": 0,"trait": "line","curve": 0},{"x": 17,"y": -27,"bCoef": 0,"trait": "line","curve": 0},{ "x": -52, "y": -27,"bCoef": 0,"trait": "line" }, {"x": -48,"y": 28,"bCoef": 0,"trait": "line"}, {"x": -22,"y": -27,"bCoef": 0,"trait": "line"}, {"x": -17,"y": 3,"bCoef": 0,"trait": "line","curve": 0},{"x": 11,"y": 3,"bCoef": 0,"trait": "line","curve": 0},{"x": 20, "y": -27, "bCoef": 0,"trait": "line","color": "454c5e"},{"x": 9,"y": 28,"bCoef": 0,"trait": "line","color": "454c5e"}, {"x": -55, "y": -27,"bCoef": 0,"trait": "line"},{"x": -25,"y": -27,"bCoef": 0,"trait": "line"},{"x": -51,"y": 28,"bCoef": 0,"trait": "line"},{"x": -51, "y": 28,"bCoef": 0,"trait": "line"} ], "segments": [ { "v0": 1, "v1": 2, "curve": -175, "color": "ffffff", "bCoef": 0, "trait": "line" }, { "v0": 3, "v1": 4, "curve": 175, "color": "454C5E", "bCoef": 0, "trait": "line" }, { "v0": 9, "v1": 10, "curve": 0, "color": "454C5E", "bCoef": 0, "trait": "line" }, { "v0": 12, "v1": 13, "curve": 0, "color": "454C5E", "bCoef": 0, "trait": "line" }, { "v0": 14, "v1": 13, "curve": 0, "color": "454C5E", "bCoef": 0, "trait": "line" }, { "v0": 7, "v1": 8, "color": "ffffff", "bCoef": 0, "trait": "line" }, { "v0": 15, "v1": 16, "curve": 0, "color": "454C5E", "bCoef": 0, "trait": "line" }, { "v0": 5, "v1": 6, "vis": true, "color": "ffffff", "bCoef": 0, "trait": "line" }, { "v0": 11, "v1": 0, "color": "ffffff", "bCoef": 0, "trait": "line" }, { "v0": 17, "v1": 18, "color": "454c5e", "bCoef": 0, "trait": "line" }, { "v0": 19, "v1": 21, "vis": true, "color": "ffffff", "bCoef": 0, "trait": "line" }, { "v0": 20, "v1": 22, "vis": true, "color": "ffffff", "bCoef": 0, "trait": "line" } ], "goals": [], "discs": [], "planes": [ { "normal": [ 0, -1 ], "dist": -200 }, { "normal": [ 0, 1 ], "dist": -200 }, { "normal": [ -1, 0 ], "dist": -200 }, { "normal": [ 1, 0 ], "dist": -200 }, { "normal": [ 0, -1 ], "dist": -150, "trait": "ballArea" }, { "normal": [ 0, 1 ], "dist": -150, "trait": "ballArea" }, { "normal": [ -1, 0 ], "dist": -150, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea" }, { "normal": [ 1, 0 ], "dist": -150, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea" } ], "joints": [], "playerPhysics": { "radius": 15.5, "bCoef": 0.35, "invMass": 0.5, "damping": 0.96, "cGroup": [ "red", "blue" ], "acceleration": 0.118, "gravity": [ 0, 0 ], "kickingAcceleration": 0.083, "kickingDamping": 0.96, "kickStrength": 4.7, "kickback": 0 }, "ballPhysics": { "radius": 6.4, "bCoef": 0.465, "cMask": [ "all" ], "damping": 0.99, "invMass": 1.4, "gravity": [ 0, 0], "color": "BDFF80", "cGroup": ["ball"], "canBeStored": true }, "canBeStored": true}';
+const STADIUM_1v1 = '{"name":"Futsal 1v1 by Luchooo from HaxMaps","width":420,"height":200,"spawnDistance":180,"bg":{"type":"hockey","width":368,"height":171,"kickOffRadius":50,"cornerRadius":0},"vertexes":[{"x":-368,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-368,"y":50,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-368,"y":-50,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-368,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":50,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":-50,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":368,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":0,"y":176,"trait":"kickOffBarrier"},{"x":0,"y":50,"trait":"kickOffBarrier"},{"x":0,"y":-50,"trait":"line"},{"x":0,"y":-176,"trait":"kickOffBarrier"},{"x":-384,"y":-50,"bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"x":384,"y":-50,"bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"x":-384,"y":50,"bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"x":384,"y":50,"bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"x":-368,"y":-127,"trait":"line"},{"x":368,"y":-127,"trait":"line"},{"x":-368,"y":127,"trait":"line"},{"x":368,"y":127,"trait":"line"},{"x":-350,"y":-171,"bCoef":0,"trait":"line"},{"x":-368,"y":-163,"bCoef":0,"trait":"line"},{"x":350,"y":-171,"bCoef":0,"trait":"line"},{"x":368,"y":-163,"bCoef":0,"trait":"line"},{"x":-350,"y":171,"bCoef":0,"trait":"line"},{"x":-368,"y":163,"bCoef":0,"trait":"line"},{"x":350,"y":171,"bCoef":0,"trait":"line"},{"x":368,"y":163,"bCoef":0,"trait":"line"},{"x":368,"y":171,"bCoef":1,"trait":"ballArea"},{"x":368,"y":-171,"bCoef":1,"trait":"ballArea"},{"x":0,"y":171,"bCoef":0,"trait":"line"},{"x":0,"y":-171,"bCoef":0,"trait":"line"},{"x":0,"y":50,"trait":"kickOffBarrier"},{"x":0,"y":-50,"trait":"kickOffBarrier"},{"x":377,"y":-50,"bCoef":1,"cMask":["red"],"trait":"line"},{"x":377,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-377,"y":-50,"bCoef":1,"cMask":["blue"],"trait":"line"},{"x":-377,"y":-171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-377,"y":50,"bCoef":1,"cMask":["blue"],"trait":"line"},{"x":-377,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":377,"y":50,"bCoef":1,"cMask":["red"],"trait":"line"},{"x":377,"y":171,"bCoef":1,"cMask":["ball"],"trait":"ballArea"}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":4,"v1":5,"trait":"ballArea"},{"v0":6,"v1":7,"trait":"ballArea"},{"v0":8,"v1":9,"trait":"kickOffBarrier"},{"v0":9,"v1":10,"curve":180,"cGroup":["blueKO"],"trait":"kickOffBarrier"},{"v0":9,"v1":10,"curve":-180,"cGroup":["redKO"],"trait":"kickOffBarrier"},{"v0":10,"v1":11,"trait":"kickOffBarrier"},{"v0":2,"v1":12,"curve":-35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":6,"v1":13,"curve":35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":1,"v1":14,"curve":35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":5,"v1":15,"curve":-35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet"},{"v0":12,"v1":14,"curve":-35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet","x":-585},{"v0":13,"v1":15,"curve":35,"vis":true,"color":"FFFFFF","bCoef":0.1,"cMask":["all"],"trait":"goalNet","x":585},{"v0":1,"v1":0,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-368},{"v0":5,"v1":4,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":368},{"v0":2,"v1":3,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-368},{"v0":6,"v1":7,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":368},{"v0":0,"v1":28,"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","y":171},{"v0":3,"v1":29,"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","y":-171},{"v0":30,"v1":31,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":10,"v1":9,"curve":-180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":33,"v1":32,"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":2,"v1":1,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":6,"v1":5,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":34,"v1":35,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":330},{"v0":36,"v1":37,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-330},{"v0":38,"v1":39,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":-330},{"v0":40,"v1":41,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","x":330},{"v0":34,"v1":40,"curve":60,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["red"],"trait":"line"},{"v0":38,"v1":36,"curve":60,"vis":false,"color":"FFFFFF","bCoef":1,"cMask":["blue"],"trait":"line"}],"goals":[{"p0":[-372,-52],"p1":[-372,48],"team":"red"},{"p0":[372,50],"p1":[372,-50],"team":"blue"}],"discs":[{"radius":5,"pos":[-368,50],"color":"FFFFFF","trait":"goalPost"},{"radius":5,"pos":[-368,-50],"color":"FFFFFF","trait":"goalPost"},{"radius":5,"pos":[368,50],"color":"FFFFFF","trait":"goalPost"},{"radius":5,"pos":[368,-50],"color":"FFFFFF","trait":"goalPost"},{"radius":3,"invMass":0,"pos":[383,51],"color":"FFFFFF","bCoef":0,"trait":"line"},{"radius":3,"invMass":0,"pos":[-383,51],"color":"FFFFFF","bCoef":0,"trait":"line"},{"radius":3,"invMass":0,"pos":[383,-51],"color":"FFFFFF","bCoef":0,"trait":"line"},{"radius":3,"invMass":0,"pos":[-383,-51],"color":"FFFFFF","bCoef":0,"trait":"line"}],"planes":[{"normal":[0,1],"dist":-171,"trait":"ballArea"},{"normal":[0,-1],"dist":-171,"trait":"ballArea"},{"normal":[0,1],"dist":-200,"bCoef":0.2,"cMask":["all"]},{"normal":[0,-1],"dist":-200,"bCoef":0.2,"cMask":["all"]},{"normal":[1,0],"dist":-420,"bCoef":0.2,"cMask":["all"]},{"normal":[-1,0],"dist":-420,"bCoef":0.2,"cMask":["all"]}],"traits":{"ballArea":{"vis":false,"bCoef":1,"cMask":["ball"]},"goalPost":{"radius":8,"invMass":0,"bCoef":1},"goalNet":{"vis":true,"bCoef":0.1,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"cMask":[""]},"arco":{"radius":2,"cMask":["n\/d"],"color":"cccccc"}},"playerPhysics":{"acceleration":0.11,"kickingAcceleration":0.1,"kickStrength":6.5},"ballPhysics":{"radius":6.4,"color":"EAFF00"}}';
 const STADIUM_3v3 = '{"name":"Futsal 3v3 Zimska Liga from HaxMaps","width":755,"height":339,"spawnDistance":310,"bg":{"type":"hockey","width":665,"height":290,"kickOffRadius":80,"cornerRadius":0},"vertexes":[{"x":-665,"y":290,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-665,"y":80,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-665,"y":-80,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-665,"y":-290,"trait":"ballArea","bCoef":1,"cMask":["ball"]},{"x":665,"y":290,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":665,"y":80,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":665,"y":-80,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":665,"y":-290,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":0,"y":306,"trait":"kickOffBarrier"},{"x":0,"y":80,"trait":"kickOffBarrier"},{"x":0,"y":-80,"trait":"line"},{"x":0,"y":-306,"trait":"kickOffBarrier"},{"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","x":-693,"y":-80},{"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","x":693,"y":-80},{"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","x":-693,"y":80},{"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","x":693,"y":80},{"trait":"line","x":-665,"y":-215},{"trait":"line","x":-500,"y":-50},{"trait":"line","x":665,"y":-215},{"trait":"line","x":500,"y":-50},{"trait":"line","x":-665,"y":215},{"trait":"line","x":-500,"y":50},{"trait":"line","x":665,"y":215},{"trait":"line","x":500,"y":50},{"bCoef":1,"trait":"ballArea","x":665,"y":290},{"bCoef":1,"trait":"ballArea","x":665,"y":-290},{"bCoef":0,"trait":"line","x":0,"y":290},{"bCoef":0,"trait":"line","x":0,"y":-290},{"x":0,"y":80,"trait":"kickOffBarrier"},{"x":0,"y":-80,"trait":"kickOffBarrier"},{"x":674,"y":-80,"trait":"line","cMask":["ball"],"bCoef":1},{"x":674,"y":-290,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-674,"y":-80,"trait":"line","cMask":["ball"],"bCoef":1},{"x":-674,"y":-290,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-674,"y":80,"trait":"line","cMask":["ball"],"bCoef":1},{"x":-674,"y":290,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":674,"y":80,"trait":"line","cMask":["ball"],"bCoef":1},{"x":674,"y":290,"trait":"ballArea","cMask":["ball"],"bCoef":1}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":4,"v1":5,"trait":"ballArea"},{"v0":6,"v1":7,"trait":"ballArea"},{"v0":8,"v1":9,"trait":"kickOffBarrier"},{"v0":9,"v1":10,"trait":"kickOffBarrier","curve":180,"cGroup":["blueKO"]},{"v0":9,"v1":10,"trait":"kickOffBarrier","curve":-180,"cGroup":["redKO"]},{"v0":10,"v1":11,"trait":"kickOffBarrier"},{"vis":true,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","v0":2,"v1":12,"color":"FFFFFF","curve":-35},{"vis":true,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","v0":6,"v1":13,"color":"FFFFFF","curve":35},{"vis":true,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","v0":1,"v1":14,"color":"FFFFFF","curve":35},{"vis":true,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","v0":5,"v1":15,"color":"FFFFFF","curve":-35},{"vis":true,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","v0":12,"v1":14,"x":-585,"color":"FFFFFF","curve":-35},{"vis":true,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","v0":13,"v1":15,"x":585,"color":"FFFFFF","curve":35},{"color":"FFFFFF","trait":"line","v0":16,"v1":17,"curve":90},{"color":"FFFFFF","trait":"line","v0":18,"v1":19,"curve":-90},{"color":"FFFFFF","trait":"line","v0":20,"v1":21,"curve":-90},{"color":"FFFFFF","trait":"line","v0":22,"v1":23,"curve":90},{"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":17,"v1":21,"curve":0},{"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":19,"v1":23,"curve":0},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":1,"v1":0,"cMask":["ball"],"x":-665},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":5,"v1":4,"cMask":["ball"],"x":665},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":2,"v1":3,"cMask":["ball"],"x":-665},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":6,"v1":7,"cMask":["ball"],"x":665},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":0,"v1":24,"y":290},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":3,"v1":25,"y":-290},{"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":26,"v1":27},{"curve":-180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":10,"v1":9},{"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":29,"v1":28},{"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":2,"v1":1},{"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":6,"v1":5},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":30,"v1":31,"cMask":["ball"],"x":614},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":32,"v1":33,"cMask":["ball"],"x":-614},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":34,"v1":35,"cMask":["ball"],"x":-614},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":36,"v1":37,"cMask":["ball"],"x":614}],"goals":[{"p0":[-674,-80],"p1":[-674,80],"team":"red"},{"p0":[674,80],"p1":[674,-80],"team":"blue"}],"discs":[{"pos":[-665,80],"trait":"goalPost","color":"FFFFFF","radius":5},{"pos":[-665,-80],"trait":"goalPost","color":"FFFFFF","radius":5},{"pos":[665,80],"trait":"goalPost","color":"FFFFFF","radius":5},{"pos":[665,-80],"trait":"goalPost","color":"FFFFFF","radius":5}],"planes":[{"normal":[0,1],"dist":-290,"trait":"ballArea"},{"normal":[0,-1],"dist":-290,"trait":"ballArea"},{"normal":[0,1],"dist":-339,"bCoef":0.2,"cMask":["all"]},{"normal":[0,-1],"dist":-339,"bCoef":0.2,"cMask":["all"]},{"normal":[1,0],"dist":-755,"bCoef":0.2,"cMask":["all"]},{"normal":[-1,0],"dist":-755,"bCoef":0.2,"cMask":["all"]}],"traits":{"ballArea":{"vis":false,"bCoef":1,"cMask":["ball"]},"goalPost":{"radius":8,"invMass":0,"bCoef":1},"goalNet":{"vis":true,"bCoef":0.1,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"cMask":[""]},"arco":{"radius":2,"cMask":["n\/d"],"color":"cccccc"}},"playerPhysics":{"acceleration":0.11,"kickingAcceleration":0.1,"kickStrength":7},"ballPhysics":{"radius":6.4,"color":"9CF0E5"}}';
-const STADIUM = '{"name":"De Paul Stadium","width":900,"height":404,"bg":{"type":"grass","width":793,"height":346,"kickOffRadius":95,"cornerRadius":0,"color":"718B5B"},"vertexes":[{"x":-793,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":-100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":-100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":0,"y":404,"trait":"kickOffBarrier"},{"x":0,"y":95,"trait":"kickOffBarrier"},{"x":0,"y":-95,"trait":"line"},{"x":0,"y":-404,"trait":"kickOffBarrier"},{"x":-840,"y":-100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":840,"y":-100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":-840,"y":100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":840,"y":100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":-793,"y":-271,"trait":"line"},{"x":-572,"y":-50,"trait":"line"},{"x":793,"y":-271,"trait":"line"},{"x":572,"y":-50,"trait":"line"},{"x":-793,"y":271,"trait":"line"},{"x":-572,"y":50,"trait":"line"},{"x":793,"y":271,"trait":"line"},{"x":572,"y":50,"trait":"line"},{"x":793,"y":346,"bCoef":1,"trait":"ballArea"},{"x":793,"y":-346,"bCoef":1,"trait":"ballArea"},{"x":0,"y":346,"bCoef":0,"trait":"line"},{"x":0,"y":-346,"bCoef":0,"trait":"line"},{"x":0,"y":95,"trait":"kickOffBarrier"},{"x":0,"y":-95,"trait":"kickOffBarrier"},{"x":802,"y":-98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":802,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-802,"y":-98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":-802,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-802,"y":98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":-802,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":802,"y":98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":802,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":331,"trait":"cornerDecoration"},{"x":-778,"y":346,"trait":"cornerDecoration"},{"x":-778,"y":-346,"trait":"cornerDecoration"},{"x":-793,"y":-331,"trait":"cornerDecoration"},{"x":778,"y":346,"trait":"cornerDecoration"},{"x":793,"y":331,"trait":"cornerDecoration"},{"x":793,"y":-331,"trait":"cornerDecoration"},{"x":778,"y":-346,"trait":"cornerDecoration"},{"x":-625,"y":-2.75,"trait":"line"},{"x":-625,"y":2.75,"trait":"line"},{"x":625,"y":-2.75,"trait":"line"},{"x":625,"y":2.75,"trait":"line"}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":4,"v1":5,"trait":"ballArea"},{"v0":6,"v1":7,"trait":"ballArea"},{"v0":8,"v1":9,"trait":"kickOffBarrier"},{"v0":9,"v1":10,"curve":180,"cGroup":["blueKO"],"trait":"kickOffBarrier"},{"v0":9,"v1":10,"curve":-180,"cGroup":["redKO"],"trait":"kickOffBarrier"},{"v0":10,"v1":11,"trait":"kickOffBarrier"},{"v0":2,"v1":12,"vis":true,"cMask":["ball"],"trait":"goalNet","y":-95},{"v0":6,"v1":13,"vis":true,"cMask":["ball"],"trait":"goalNet","y":-95},{"v0":1,"v1":14,"vis":true,"cMask":["ball"],"trait":"goalNet","y":95},{"v0":5,"v1":15,"vis":true,"cMask":["ball"],"trait":"goalNet","y":95},{"v0":12,"v1":14,"vis":true,"cMask":["ball"],"trait":"goalNet","x":-840},{"v0":13,"v1":15,"vis":true,"cMask":["ball"],"trait":"goalNet","x":585},{"v0":16,"v1":17,"curve":90,"color":"FFFFFF","trait":"line"},{"v0":18,"v1":19,"curve":-90,"color":"FFFFFF","trait":"line"},{"v0":20,"v1":21,"curve":-90,"color":"FFFFFF","trait":"line"},{"v0":22,"v1":23,"curve":90,"color":"FFFFFF","trait":"line"},{"v0":17,"v1":21,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","x":-600},{"v0":19,"v1":23,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","x":572},{"v0":1,"v1":0,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":9,"x":-665},{"v0":5,"v1":4,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":-9,"x":665},{"v0":2,"v1":3,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":-9,"x":-665},{"v0":6,"v1":7,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":9,"x":665},{"v0":0,"v1":24,"vis":true,"color":"FFFFFF","trait":"ballArea","y":290},{"v0":3,"v1":25,"vis":true,"color":"FFFFFF","trait":"ballArea","y":-290},{"v0":26,"v1":27,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":10,"v1":9,"curve":-180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":29,"v1":28,"curve":180.43079330521417,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","_data":{"mirror":{},"arc":{"a":[0,-95],"b":[0,95],"curve":180.43079330521417,"radius":95.00067131878964,"center":[0.3571428571409862,0],"from":-1.574555707580645,"to":1.574555707580645}}},{"v0":2,"v1":1,"curve":0,"vis":true,"color":"FF9494","bCoef":0,"trait":"line"},{"v0":6,"v1":5,"curve":0,"vis":true,"color":"A3BAFF","bCoef":0,"trait":"line"},{"v0":30,"v1":31,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":614},{"v0":32,"v1":33,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":-614},{"v0":34,"v1":35,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":-614},{"v0":36,"v1":37,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":614},{"v0":38,"v1":39,"vis":true,"trait":"cornerDecoration"},{"v0":40,"v1":41,"vis":true,"trait":"cornerDecoration"},{"v0":42,"v1":43,"vis":true,"trait":"cornerDecoration"},{"v0":44,"v1":45,"vis":true,"trait":"cornerDecoration"},{"v0":46,"v1":47,"trait":"line"},{"v0": 46,"v1":47,"curve":-180,"trait":"line"},{"v0":46,"v1":47,"curve":180,"trait":"line"},{"v0":48,"v1":49,"trait":"line"},{"v0":48,"v1":49,"curve":-180,"trait":"line"},{"v0":48,"v1":49,"curve":180,"trait":"line"}],"goals":[{"p0":[-802,-100],"p1":[-802,100],"team":"red"},{"p0":[802,100],"p1":[802,-100],"team":"blue"}],"discs":[{"pos":[-793,100],"trait":"goalPost"},{"pos":[-793,-100],"trait":"goalPost"},{"pos":[793,100],"trait":"goalPost"},{"pos":[793,-100],"trait":"goalPost"}],"planes":[{"normal":[0,1],"dist":-346,"trait":"ballArea","_data":{"extremes":{"normal":[0,1],"dist":-346,"canvas_rect":[-900,-404,900,404],"a":[-900,-346],"b":[900,-346]}}},{"normal":[0,-1],"dist":-346,"trait":"ballArea","_data":{"extremes":{"normal":[0,-1],"dist":-346,"canvas_rect":[-900,-404,900,404],"a":[-900,346],"b":[900,346]}}},{"normal":[0,1],"dist":-404,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,1],"dist":-404,"canvas_rect":[-900,-404,900,404],"a":[-900,-404],"b":[900,-404]}}},{"normal":[0,-1],"dist":-404,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,-1],"dist":-404,"canvas_rect":[-900,-404,900,404],"a":[-900,404],"b":[900,404]}}},{"normal":[1,0],"dist":-900,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[1,0],"dist":-900,"canvas_rect":[-900,-404,900,404],"a":[-900,-404],"b":[-900,404]}}},{"normal":[-1,0],"dist":-900,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[-1,0],"dist":-900,"canvas_rect":[-900,-404,900,404],"a":[900,-404],"b":[900,404]}}}],"traits":{"ballArea":{"vis":false,"bCoef":1.175,"cMask":["ball"]},"goalPost":{"radius":4.65,"invMass":0,"color":"C6D881","bCoef":1.25},"goalNet":{"vis":true,"color":"DDE6ED","bCoef":0.15,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"color":"FFFFFF","cMask":[""]},"cornerDecoration":{"vis":true,"color":"FFFFFF","bCoef":0,"cMask":[""],"curve":90},"arco":{"radius":2,"cMask":["n\/d"],"color":"cccccc"}},"playerPhysics":{"radius":14.5,"acceleration":0.11,"kickingAcceleration":0.083,"kickStrength":4.655,"bCoef":0.25},"ballPhysics":{"radius":6.4,"color":"CCFF99","bCoef":0.468,"invMass":1.4},"joints":[],"redSpawnPoints":[[-310, 0], [-310, 55], [-310, -55], [-310, 110], [-310, -110], [-700, 370]],"blueSpawnPoints":[[310, 0], [310, 55], [310, -55], [310, 110], [310, -110], [700, 370]],"canBeStored":false}';
-const PENALTY_STADIUM = '{"name":"De Paul Stadium | PEN","width":420,"height":200,"spawnDistance":310,"bg":{"type":"grass","width":400,"height":260,"kickOffRadius":0,"cornerRadius":0,"color":"718B5B"},"vertexes":[{"x":323,"y":260,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":-30},{"x":323,"y":100,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":-30},{"x":323,"y":-100,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":30},{"x":323,"y":-260,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":30},{"x":370,"y":-100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","radius":0},{"x":370,"y":100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","radius":0},{"x":332,"y":-98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":323,"y":260,"bCoef":0,"trait":"line"},{"x":323,"y":-260,"bCoef":0,"trait":"line"},{"x":0,"y":-260,"bCoef":0,"trait":"line"},{"x":0,"y":260,"bCoef":0,"trait":"line"},{"x":323,"y":200,"bCoef":0,"trait":"line"},{"x":110,"y":200,"bCoef":0,"trait":"line"},{"x":110,"y":-200,"bCoef":0,"trait":"line"},{"x":323,"y":-200,"bCoef":0,"trait":"line"},{"x":0,"y":100,"bCoef":0,"trait":"line"},{"x":0,"y":-100,"bCoef":0,"trait":"line"},{"x":110,"y":5,"bCoef":0,"trait":"line"},{"x":110,"y":-5,"bCoef":0,"trait":"line"},{"x":55,"y":-260,"bCoef":0,"cMask":["red"],"trait":"penArea"},{"x":65,"y":260,"bCoef":0,"cMask":["red"],"trait":"penArea"},{"x":300,"y":-90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"x":365,"y":-90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"x":365,"y":90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"x":300,"y":90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":2,"v1":4,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"goalNet","y":-100},{"v0":1,"v1":5,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"goalNet","y":100},{"v0":1,"v1":0,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":-30,"x":665},{"v0":2,"v1":3,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":30,"x":665},{"v0":2,"v1":1,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":10,"v1":7,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":10,"v1":9,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":9,"v1":8,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":11,"v1":12,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":12,"v1":13,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":13,"v1":14,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":15,"v1":16,"curve":150,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":18,"v1":17,"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":17,"v1":18,"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":5,"v1":4,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"goalNet"},{"v0":19,"v1":20,"curve":45,"vis":false,"bCoef":0,"cMask":["red"],"trait":"penArea"},{"v0":21,"v1":22,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"v0":22,"v1":23,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"v0":23,"v1":24,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"v0":24,"v1":21,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"}],"goals":[{"p0":[332,100],"p1":[332,-100],"team":"blue"},{"p0":[325,-100],"p1":[100,0],"team":"red"},{"p0":[100,0],"p1":[320,100],"team":"red"}],"discs":[{"radius":6.5,"color":"FFDEAD","bCoef":0.465,"invMass":1.4,"pos":[110,0],"cGroup":["ball","kick","score"]},{"pos":[323,100],"trait":"goalPost"},{"pos":[323,-100],"trait":"goalPost"}],"planes":[{"normal":[0,1],"dist":-260,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,1],"dist":-260,"canvas_rect":[-710,-260,710,260],"a":[-710,-260],"b":[710,-260]}}},{"normal":[0,-1],"dist":-260,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,-1],"dist":-260,"canvas_rect":[-710,-260,710,260],"a":[-710,260],"b":[710,260]}}},{"normal":[1,0],"dist":-499,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[1,0],"dist":-499,"canvas_rect":[-710,-260,710,260],"a":[-499,-260],"b":[-499,260]}}},{"normal":[-1,0],"dist":-376,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[-1,0],"dist":-376,"canvas_rect":[-710,-260,710,260],"a":[376,-260],"b":[376,260]}}}],"traits":{"ballArea":{"vis":false,"bCoef":1,"cMask":["ball"]},"goalPost":{"radius":4.65,"invMass":0,"color":"C6D881","bCoef":1.25},"goalNet":{"vis":true,"bCoef":0.2,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"cMask":[""]},"arco":{"radius":2,"cMask":["n/d"],"color":"cccccc"},"penArea":{"vis":false,"bCoef":0,"cMask":["red"]}},"playerPhysics":{"radius":14.5,"acceleration":0.11,"kickingAcceleration":0.083,"kickStrength":4.9,"bCoef":0.26},"ballPhysics":"disc0","joints":[],"canBeStored":false,"redSpawnPoints":[[-100,0]],"blueSpawnPoints":[[323,0]],"kickOffReset":"full"}';
-const DISCORD_LINK = null;
+const STADIUM = '{"name":"32MBVRAM Stadium","width":900,"height":404,"bg":{"type":"grass","width":793,"height":346,"kickOffRadius":95,"cornerRadius":0,"color":"718B5B"},"vertexes":[{"x":-793,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":-100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":-100,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":793,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":0,"y":404,"trait":"kickOffBarrier"},{"x":0,"y":95,"trait":"kickOffBarrier"},{"x":0,"y":-95,"trait":"line"},{"x":0,"y":-404,"trait":"kickOffBarrier"},{"x":-840,"y":-100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":840,"y":-100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":-840,"y":100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":840,"y":100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet"},{"x":-793,"y":-271,"trait":"line"},{"x":-572,"y":-50,"trait":"line"},{"x":793,"y":-271,"trait":"line"},{"x":572,"y":-50,"trait":"line"},{"x":-793,"y":271,"trait":"line"},{"x":-572,"y":50,"trait":"line"},{"x":793,"y":271,"trait":"line"},{"x":572,"y":50,"trait":"line"},{"x":793,"y":346,"bCoef":1,"trait":"ballArea"},{"x":793,"y":-346,"bCoef":1,"trait":"ballArea"},{"x":0,"y":346,"bCoef":0,"trait":"line"},{"x":0,"y":-346,"bCoef":0,"trait":"line"},{"x":0,"y":95,"trait":"kickOffBarrier"},{"x":0,"y":-95,"trait":"kickOffBarrier"},{"x":802,"y":-98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":802,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-802,"y":-98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":-802,"y":-346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-802,"y":98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":-802,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":802,"y":98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":802,"y":346,"bCoef":1,"cMask":["ball"],"trait":"ballArea"},{"x":-793,"y":331,"trait":"cornerDecoration"},{"x":-778,"y":346,"trait":"cornerDecoration"},{"x":-778,"y":-346,"trait":"cornerDecoration"},{"x":-793,"y":-331,"trait":"cornerDecoration"},{"x":778,"y":346,"trait":"cornerDecoration"},{"x":793,"y":331,"trait":"cornerDecoration"},{"x":793,"y":-331,"trait":"cornerDecoration"},{"x":778,"y":-346,"trait":"cornerDecoration"},{"x":-625,"y":-2.75,"trait":"line"},{"x":-625,"y":2.75,"trait":"line"},{"x":625,"y":-2.75,"trait":"line"},{"x":625,"y":2.75,"trait":"line"}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":4,"v1":5,"trait":"ballArea"},{"v0":6,"v1":7,"trait":"ballArea"},{"v0":8,"v1":9,"trait":"kickOffBarrier"},{"v0":9,"v1":10,"curve":180,"cGroup":["blueKO"],"trait":"kickOffBarrier"},{"v0":9,"v1":10,"curve":-180,"cGroup":["redKO"],"trait":"kickOffBarrier"},{"v0":10,"v1":11,"trait":"kickOffBarrier"},{"v0":2,"v1":12,"vis":true,"cMask":["ball"],"trait":"goalNet","y":-95},{"v0":6,"v1":13,"vis":true,"cMask":["ball"],"trait":"goalNet","y":-95},{"v0":1,"v1":14,"vis":true,"cMask":["ball"],"trait":"goalNet","y":95},{"v0":5,"v1":15,"vis":true,"cMask":["ball"],"trait":"goalNet","y":95},{"v0":12,"v1":14,"vis":true,"cMask":["ball"],"trait":"goalNet","x":-840},{"v0":13,"v1":15,"vis":true,"cMask":["ball"],"trait":"goalNet","x":585},{"v0":16,"v1":17,"curve":90,"color":"FFFFFF","trait":"line"},{"v0":18,"v1":19,"curve":-90,"color":"FFFFFF","trait":"line"},{"v0":20,"v1":21,"curve":-90,"color":"FFFFFF","trait":"line"},{"v0":22,"v1":23,"curve":90,"color":"FFFFFF","trait":"line"},{"v0":17,"v1":21,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","x":-600},{"v0":19,"v1":23,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","x":572},{"v0":1,"v1":0,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":9,"x":-665},{"v0":5,"v1":4,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":-9,"x":665},{"v0":2,"v1":3,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":-9,"x":-665},{"v0":6,"v1":7,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","bias":9,"x":665},{"v0":0,"v1":24,"vis":true,"color":"FFFFFF","trait":"ballArea","y":290},{"v0":3,"v1":25,"vis":true,"color":"FFFFFF","trait":"ballArea","y":-290},{"v0":26,"v1":27,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":10,"v1":9,"curve":-180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":29,"v1":28,"curve":180.43079330521417,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","_data":{"mirror":{},"arc":{"a":[0,-95],"b":[0,95],"curve":180.43079330521417,"radius":95.00067131878964,"center":[0.3571428571409862,0],"from":-1.574555707580645,"to":1.574555707580645}}},{"v0":2,"v1":1,"curve":0,"vis":true,"color":"FF9494","bCoef":0,"trait":"line"},{"v0":6,"v1":5,"curve":0,"vis":true,"color":"A3BAFF","bCoef":0,"trait":"line"},{"v0":30,"v1":31,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":614},{"v0":32,"v1":33,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":-614},{"v0":34,"v1":35,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":-614},{"v0":36,"v1":37,"vis":false,"color":"FFFFFF","cMask":["ball"],"trait":"ballArea","x":614},{"v0":38,"v1":39,"vis":true,"trait":"cornerDecoration"},{"v0":40,"v1":41,"vis":true,"trait":"cornerDecoration"},{"v0":42,"v1":43,"vis":true,"trait":"cornerDecoration"},{"v0":44,"v1":45,"vis":true,"trait":"cornerDecoration"},{"v0":46,"v1":47,"trait":"line"},{"v0": 46,"v1":47,"curve":-180,"trait":"line"},{"v0":46,"v1":47,"curve":180,"trait":"line"},{"v0":48,"v1":49,"trait":"line"},{"v0":48,"v1":49,"curve":-180,"trait":"line"},{"v0":48,"v1":49,"curve":180,"trait":"line"}],"goals":[{"p0":[-802,-100],"p1":[-802,100],"team":"red"},{"p0":[802,100],"p1":[802,-100],"team":"blue"}],"discs":[{"pos":[-793,100],"trait":"goalPost"},{"pos":[-793,-100],"trait":"goalPost"},{"pos":[793,100],"trait":"goalPost"},{"pos":[793,-100],"trait":"goalPost"}],"planes":[{"normal":[0,1],"dist":-346,"trait":"ballArea","_data":{"extremes":{"normal":[0,1],"dist":-346,"canvas_rect":[-900,-404,900,404],"a":[-900,-346],"b":[900,-346]}}},{"normal":[0,-1],"dist":-346,"trait":"ballArea","_data":{"extremes":{"normal":[0,-1],"dist":-346,"canvas_rect":[-900,-404,900,404],"a":[-900,346],"b":[900,346]}}},{"normal":[0,1],"dist":-404,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,1],"dist":-404,"canvas_rect":[-900,-404,900,404],"a":[-900,-404],"b":[900,-404]}}},{"normal":[0,-1],"dist":-404,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,-1],"dist":-404,"canvas_rect":[-900,-404,900,404],"a":[-900,404],"b":[900,404]}}},{"normal":[1,0],"dist":-900,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[1,0],"dist":-900,"canvas_rect":[-900,-404,900,404],"a":[-900,-404],"b":[-900,404]}}},{"normal":[-1,0],"dist":-900,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[-1,0],"dist":-900,"canvas_rect":[-900,-404,900,404],"a":[900,-404],"b":[900,404]}}}],"traits":{"ballArea":{"vis":false,"bCoef":1.175,"cMask":["ball"]},"goalPost":{"radius":4.65,"invMass":0,"color":"C6D881","bCoef":1.25},"goalNet":{"vis":true,"color":"DDE6ED","bCoef":0.15,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"color":"FFFFFF","cMask":[""]},"cornerDecoration":{"vis":true,"color":"FFFFFF","bCoef":0,"cMask":[""],"curve":90},"arco":{"radius":2,"cMask":["n\/d"],"color":"cccccc"}},"playerPhysics":{"radius":14.5,"acceleration":0.11,"kickingAcceleration":0.083,"kickStrength":4.655,"bCoef":0.25},"ballPhysics":{"radius":6.4,"color":"CCFF99","bCoef":0.468,"invMass":1.4},"joints":[],"redSpawnPoints":[[-310, 0], [-310, 55], [-310, -55], [-310, 110], [-310, -110], [-700, 370]],"blueSpawnPoints":[[310, 0], [310, 55], [310, -55], [310, 110], [310, -110], [700, 370]],"canBeStored":false}';
+const PENALTY_STADIUM = '{"name":"32MBVRAM Stadium | PEN","width":420,"height":200,"spawnDistance":310,"bg":{"type":"grass","width":400,"height":260,"kickOffRadius":0,"cornerRadius":0,"color":"718B5B"},"vertexes":[{"x":323,"y":260,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":-30},{"x":323,"y":100,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":-30},{"x":323,"y":-100,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":30},{"x":323,"y":-260,"bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":30},{"x":370,"y":-100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","radius":0},{"x":370,"y":100,"bCoef":0.1,"cMask":["ball"],"trait":"goalNet","radius":0},{"x":332,"y":-98,"bCoef":1,"cMask":["ball"],"trait":"line"},{"x":323,"y":260,"bCoef":0,"trait":"line"},{"x":323,"y":-260,"bCoef":0,"trait":"line"},{"x":0,"y":-260,"bCoef":0,"trait":"line"},{"x":0,"y":260,"bCoef":0,"trait":"line"},{"x":323,"y":200,"bCoef":0,"trait":"line"},{"x":110,"y":200,"bCoef":0,"trait":"line"},{"x":110,"y":-200,"bCoef":0,"trait":"line"},{"x":323,"y":-200,"bCoef":0,"trait":"line"},{"x":0,"y":100,"bCoef":0,"trait":"line"},{"x":0,"y":-100,"bCoef":0,"trait":"line"},{"x":110,"y":5,"bCoef":0,"trait":"line"},{"x":110,"y":-5,"bCoef":0,"trait":"line"},{"x":55,"y":-260,"bCoef":0,"cMask":["red"],"trait":"penArea"},{"x":65,"y":260,"bCoef":0,"cMask":["red"],"trait":"penArea"},{"x":300,"y":-90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"x":365,"y":-90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"x":365,"y":90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"x":300,"y":90,"bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":2,"v1":4,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"goalNet","y":-100},{"v0":1,"v1":5,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"goalNet","y":100},{"v0":1,"v1":0,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":-30,"x":665},{"v0":2,"v1":3,"vis":true,"color":"FFFFFF","bCoef":1,"cMask":["ball"],"trait":"ballArea","bias":30,"x":665},{"v0":2,"v1":1,"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":10,"v1":7,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":10,"v1":9,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":9,"v1":8,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":11,"v1":12,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":12,"v1":13,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":13,"v1":14,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":15,"v1":16,"curve":150,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":18,"v1":17,"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":17,"v1":18,"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line"},{"v0":5,"v1":4,"vis":true,"color":"FFFFFF","cMask":["ball"],"trait":"goalNet"},{"v0":19,"v1":20,"curve":45,"vis":false,"bCoef":0,"cMask":["red"],"trait":"penArea"},{"v0":21,"v1":22,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"v0":22,"v1":23,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"v0":23,"v1":24,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"},{"v0":24,"v1":21,"vis":false,"color":"FFFFFF","bCoef":0.1,"cMask":["red","blue"],"cGroup":["redKO","blueKO"],"trait":"kickOffBarrier"}],"goals":[{"p0":[332,100],"p1":[332,-100],"team":"blue"},{"p0":[325,-100],"p1":[100,0],"team":"red"},{"p0":[100,0],"p1":[320,100],"team":"red"}],"discs":[{"radius":6.5,"color":"FFDEAD","bCoef":0.465,"invMass":1.4,"pos":[110,0],"cGroup":["ball","kick","score"]},{"pos":[323,100],"trait":"goalPost"},{"pos":[323,-100],"trait":"goalPost"}],"planes":[{"normal":[0,1],"dist":-260,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,1],"dist":-260,"canvas_rect":[-710,-260,710,260],"a":[-710,-260],"b":[710,-260]}}},{"normal":[0,-1],"dist":-260,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[0,-1],"dist":-260,"canvas_rect":[-710,-260,710,260],"a":[-710,260],"b":[710,260]}}},{"normal":[1,0],"dist":-499,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[1,0],"dist":-499,"canvas_rect":[-710,-260,710,260],"a":[-499,-260],"b":[-499,260]}}},{"normal":[-1,0],"dist":-376,"bCoef":0.2,"cMask":["all"],"_data":{"extremes":{"normal":[-1,0],"dist":-376,"canvas_rect":[-710,-260,710,260],"a":[376,-260],"b":[376,260]}}}],"traits":{"ballArea":{"vis":false,"bCoef":1,"cMask":["ball"]},"goalPost":{"radius":4.65,"invMass":0,"color":"C6D881","bCoef":1.25},"goalNet":{"vis":true,"bCoef":0.2,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"cMask":[""]},"arco":{"radius":2,"cMask":["n/d"],"color":"cccccc"},"penArea":{"vis":false,"bCoef":0,"cMask":["red"]}},"playerPhysics":{"radius":14.5,"acceleration":0.11,"kickingAcceleration":0.083,"kickStrength":4.9,"bCoef":0.26},"ballPhysics":"disc0","joints":[],"canBeStored":false,"redSpawnPoints":[[-100,0]],"blueSpawnPoints":[[323,0]],"kickOffReset":"full"}';
+const DISCORD_LINK = "https://discord.gg/HTZD8HA";
 const COMMANDS_TO_VALIDATE = ["discord", "kickafk", "afk", "captains", "unmute", "clearmutes"]; // These commands can cause spam in the chat or bypass the mute
 const INVISIBLE_CHARACTERS = ["	", "ㅤ"];
 
@@ -331,7 +338,7 @@ class Surrender {
     prevScore = `${scores.red}-${scores.blue}`;
     handlePostGame(getOppositeTeamId(teamId));
     room.stopGame();
-    room.sendAnnouncement(`🏴 Đội ${TEAM_NAMES[teamId]} đã đầu hàng`, null, 0x00FFFF, "small-italic", 0)
+    room.sendAnnouncement(`🏴 Đội ${TEAM_NAMES[teamId]} đã xin chui háng`, null, 0x00FFFF, "small-italic", 0)
   }
   vote(player) {
     if ( player.team == 0 ) return;
@@ -342,7 +349,7 @@ class Surrender {
       let voter = room.getPlayer(voterId);
       if ( voter && (voter.team == player.team) ) count++;
     };
-    room.sendAnnouncement(`${player.name} đã bỏ phiếu đầu hàng cho ${TEAM_NAMES[player.team]} (${count}/${MIN_VOTES_FOR_SURRENDER})`, null, GREEN, "small", 0);
+    room.sendAnnouncement(`${player.name} đã bỏ phiếu chui háng cho ${TEAM_NAMES[player.team]} (${count}/${MIN_VOTES_FOR_SURRENDER})`, null, GREEN, "small", 0);
 
     if ( count >= MIN_VOTES_FOR_SURRENDER ) this.surrender(player.team);
   }
@@ -429,7 +436,7 @@ var ballColor = new BallColor();
 var room = HBInit({
   roomName: ROOM_NAME,
   maxPlayers: 30,
-  playerName: "VAO RUM CUA TAO",
+  playerName: "BLV 32 BuoiBeo",
   public: PUBLIC,
 });
 room.setTeamsLock(1);
@@ -572,7 +579,7 @@ function resetStorage() {
   let topGoalkeepers = playerList.sort((player1, player2) => player2.cleansheets - player1.cleansheets).slice(0, 5);
   let topOwnGoalScorers = playerList.sort((player1, player2) => player2.ownGoals - player1.ownGoals).slice(0, 5);
 
-  let msg = `Danh sách vua phá lưới tháng ${getMonths()}:
+  let msg = `Danh sách vua bú liếm tháng ${getMonths()}:
 
 ${topScorers.map((player, index) => `${index + 1}. ${player.name} - ${player.goals} bàn thắng (${player.assists} kiến tạo)`).join("\n")}`;
   setInterval(room.sendAnnouncement.bind(null, msg, null, BLUE, "small-bold", 0), 3.5 * 60 * 1000);
@@ -583,7 +590,7 @@ ${topScorers.map((player, index) => `${index + 1}. ${player.name} - ${player.goa
       value: `============================\n\n*${topPlayers.map((player, index) => `${index + 1}. ${player.name} - ${player.points} sao`).join("\n")}*`,
     },
     {
-      name: "Vua phá lưới",
+      name: "Vua bú liếm",
       value: `============================\n\n*${topScorers.map((player, index) => `${index + 1}. ${player.name} - ${player.goals} bàn thắng`).join("\n")}*`,
     },
     {
@@ -595,11 +602,11 @@ ${topScorers.map((player, index) => `${index + 1}. ${player.name} - ${player.goa
       value: `============================\n\n*${topMOTMs.map((player, index) => `${index + 1}. ${player.name} - ${player.motms} lần nhận MOTM`).join("\n")}*`,
     },
     {
-      name: "Giữ sạch lưới nhiều nhất",
+      name: "Vua thủ môn",
       value: `============================\n\n*${topGoalkeepers.map((player, index) => `${index + 1}. ${player.name} - ${player.cleansheets} trận sạch lưới`).join("\n")}*`,
     },
     {
-      name: "Báo nhất",
+      name: "NGU nhất",
       value: `============================\n\n*${topOwnGoalScorers.map((player, index) => `${index + 1}. ${player.name} - ${player.ownGoals} bàn thắng phản lưới nhà`).join("\n")}*`,
     },
   ];
@@ -838,16 +845,21 @@ async function avatarEffect(playerId, avatars) {
 }
 
 async function celebrationEffect(player, hasScored) {
-  let players;
+  // Biến 'players' được khai báo nhưng không được sử dụng/cần thiết ở đây,
+  // có thể xóa bỏ hoặc giữ lại nếu được dùng ở nơi khác.
+  // let players; // Dòng này có thể xóa bỏ nếu không được dùng ở nơi khác trong hàm
+
+  let playerIds; // Khai báo playerIds ở đây nếu nó không được khai báo toàn cục hoặc trong phạm vi rộng hơn
+
   switch ( getRandomInt(10) ) {
     case 0:
-      avatarEffect(player.id, ["🤫", "😂", "🤫", "😂"]);
+      avatarEffect(player.id, ["🗿", "😂", "🗿", "😂"]);
       break;
     case 1:
       avatarEffect(player.id, ["😴", "💤", "😴", "💤"]);
       break;
     case 2:
-      avatarEffect(player.id, ["🖕", "🤣", "🖕", "🤣"]);
+      avatarEffect(player.id, ["👎", "🤣", "👎", "🤣"]);
       break;
     case 3:
       let originalRadius = room.getPlayerDiscProperties(player.id).radius;
@@ -861,8 +873,10 @@ async function celebrationEffect(player, hasScored) {
       room.setPlayerDiscProperties(player.id, { radius: stadium.playerRadius * 2 });
       break;
     case 5:
+      // Gán playerIds đúng cách
       playerIds = room.getPlayerList().flatMap(player_ => (player_.team == player.team) && (player_.id != player.id) ? [player_.id] : []);
-      for (let i = 0; i < players.length; i++) {
+      // Lặp lại bằng cách sử dụng playerIds.length, hiện đã được điền đúng
+      for (let i = 0; i < playerIds.length; i++) { // ĐÃ SỬA: Thay đổi 'players.length' thành 'playerIds.length'
         room.setPlayerDiscProperties(
           playerIds[i],
           {
@@ -888,9 +902,11 @@ async function celebrationEffect(player, hasScored) {
       break;
     case 8:
       playerIds = room.getPlayerList().flatMap(player_ => player_.team == getOppositeTeamId(player.team) ? [player_.id] : []);
-      await Promise.all(playerIds.map(player_ => room.setPlayerAvatar(id, "🐷")));
+      // Có vẻ như 'id' ở đây nên là 'player_.id' hoặc chỉ 'id' nếu callback của map đang sử dụng destructuring cho đối tượng player.
+      // Giả sử 'id' là tham số của callback map (như trong case 7), nó sẽ hoạt động.
+      await Promise.all(playerIds.map(id => room.setPlayerAvatar(id, "🐷")));
       await new Promise(r => setTimeout(r, 2500));
-      await Promise.all(playerIds.map(player_ => room.setPlayerAvatar(id, null)));
+      await Promise.all(playerIds.map(id => room.setPlayerAvatar(id, null)));
       break;
     case 9:
       for (const player_ of room.getPlayerList()) {
@@ -907,7 +923,7 @@ function showSpecTable() {
   let playerList = getSpectators().map((player, index) => `${player.name} (#${index + 1})`);
   let table = " ".repeat(85) + "DANH SÁCH DỰ BỊ\n" + "_".repeat(150) + "\n" + playerList.join("  •  ") + "\n" + "_".repeat(150);
   room.sendAnnouncement(table, captains[pickTurn], BLUE, "small-bold", 2);
-  room.sendAnnouncement("Hướng dẫn: nhập số hoặc tag để chọn người chơi (VD: 2 hoặc @De_Paul). Nhập '0' để tự động chọn người chơi có thống kê tốt nhất", captains[pickTurn], YELLOW, "small", 0);
+  room.sendAnnouncement("Hướng dẫn: nhập số hoặc tag để chọn người chơi (VD: 2 hoặc @32MBVRAM). Nhập '0' để tự động chọn người chơi có thống kê tốt nhất", captains[pickTurn], YELLOW, "small", 0);
 }
 
 function isPlayerValid(player) {
@@ -1172,7 +1188,7 @@ function discordFunc(value, player) {
     room.sendAnnouncement(`Room hiện chưa có server Discord`, player.id, YELLOW, "normal", 0);
     return false;
   };
-  room.sendAnnouncement(`Vào server Discord của De Paul 🥰: ${DISCORD_LINK}`, null, GREEN, "normal", 0);
+  room.sendAnnouncement(`Vào server Discord của 32MBVRAM 🥰: ${DISCORD_LINK}`, null, GREEN, "normal", 0);
   return true;
 }
 
@@ -1463,14 +1479,14 @@ function adjustSizeFunc(value, player) {
 
 function assignCaptainFunc(value, player) {
   if ( !value ) {
-    room.sendAnnouncement("Vui lòng cung cấp tên đội và một người chơi hợp lệ (VD: !assigncap red @De_Paul hoặc !assigncap blue paul)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp tên đội và một người chơi hợp lệ (VD: !assigncap red @32MBVRAM hoặc !assigncap blue 32)", player.id, RED);
     return false;
   };
 
   let teamIds = {"red": 1, "blue": 2};
   let [team, name] = value.split(" ", 2);
   if ( teamIds[team] === undefined ) {
-    room.sendAnnouncement("Tên đội phải là \"red\" hoặc \"blue\" (VD: !assigncap red paul)", player.id, RED);
+    room.sendAnnouncement("Tên đội phải là \"red\" hoặc \"blue\" (VD: !assigncap red 32)", player.id, RED);
     return false;
   };
   let assignedPlayer = getPlayerByName(name);
@@ -1525,7 +1541,7 @@ function loginFunc(password, player) {
 
 function yellowCardFunc(value, player) {
   if ( !value ) {
-    room.sendAnnouncement("Vui lòng cung cấp một người chơi hợp lệ và lý do phạt nếu có (VD: !yellow @De_Paul hoặc !yellow paul Láo)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp một người chơi hợp lệ và lý do phạt nếu có (VD: !yellow @32MBVRAM hoặc !yellow 32 ác)", player.id, RED);
     return false;
   };
 
@@ -1559,7 +1575,7 @@ function yellowCardFunc(value, player) {
 
 function clearYellowCardFunc(value, player) {
   if ( !value ) {
-    room.sendAnnouncement("Vui lòng cung cấp một người chơi hợp lệ (VD: !clearyellow @De_Paul hoặc !clearyellow paul)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp một người chơi hợp lệ (VD: !clearyellow @32MBVRAM hoặc !clearyellow 32)", player.id, RED);
     return false;
   };
 
@@ -1583,7 +1599,7 @@ function clearYellowCardFunc(value, player) {
 
 function muteFunc(value, player) {
   if ( !value ) {
-    room.sendAnnouncement("Vui lòng cung cấp người chơi, thời hạn cấm chat (đơn vị phút, để 0 để cấm vĩnh viễn) và lý do nếu có (VD: !mute @ân 1 / !mute paul 0 Ngu)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp người chơi, thời hạn cấm chat (đơn vị phút, để 0 để cấm vĩnh viễn) và lý do nếu có (VD: !mute @32MBVRAM 1 / !mute 32 0 Ngu)", player.id, RED);
     return false;
   };
 
@@ -1600,7 +1616,7 @@ function muteFunc(value, player) {
   };
 
   if ( isNaN(period) || period < 0 ) {
-    room.sendAnnouncement("Vui lòng cung cấp một thời hạn cấm chat hợp lệ (VD: !mute @De_Paul 3)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp một thời hạn cấm chat hợp lệ (VD: !mute @32MBVRAM 3)", player.id, RED);
     return false;
   };
 
@@ -1618,7 +1634,7 @@ function muteFunc(value, player) {
 
 function unmuteFunc(value, player) {
   if ( !value ) {
-    room.sendAnnouncement("Vui lòng cung cấp một người chơi hợp lệ (VD: !unmute @De_Paul hoặc !unmute paul)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp một người chơi hợp lệ (VD: !unmute @32MBVRAM hoặc !unmute 32)", player.id, RED);
     return false;
   };
 
@@ -1655,7 +1671,7 @@ function unlockFunc(value, player) {
 
 function banFunc(value, player) {
   if ( !value ) {
-    room.sendAnnouncement("Vui lòng cung cấp người chơi, thời hạn ban (đơn vị giờ, để 0 để cấm vĩnh viễn) và lý do nếu có (VD: !ban @ân 24 / !ban paul 0 Phá room)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp người chơi, thời hạn ban (đơn vị giờ, để 0 để cấm vĩnh viễn) và lý do nếu có (VD: !ban @32MBVRAM 24 / !ban 32 0 Phá room)", player.id, RED);
     return false;
   };
 
@@ -1671,7 +1687,7 @@ function banFunc(value, player) {
     return false;
   };
   if ( isNaN(period) || period < 0 ) {
-    room.sendAnnouncement("Vui lòng cung cấp một thời hạn cấm chat hợp lệ (VD: !mute @De_Paul 3)", player.id, RED);
+    room.sendAnnouncement("Vui lòng cung cấp một thời hạn cấm chat hợp lệ (VD: !mute @32MBVRAM 3)", player.id, RED);
     return false;
   };
   ban(toPlayer.id, reason, +period);
@@ -1893,7 +1909,7 @@ function saveStats() {
       item.games++;
       if ( teamId == prevWinner ) {
         item.wins++;
-        item.points++;
+        item.points += 2;
       } else if ( (item.points != 0) && (auth != motmAuth) ) {
         item.points--;
       };
@@ -2263,22 +2279,55 @@ async function pickPlayers() {
   requestPick();
 }
 
+function getFootballRole(points) {
+  if (points >= 300) return { roleName: "💥✨LEGENDARY", color: 0x9400D3 }; // NEW
+  if (points >= 200) return { roleName: "🏆CHAMPION III", color: 0xFFD700 };
+  if (points >= 180) return { roleName: "🏆CHAMPION II", color: 0xFFC300 };
+  if (points >= 160) return { roleName: "🏆CHAMPION I", color: 0xFFB000 };
+  if (points >= 140) return { roleName: "🔥SUPER PRO III", color: 0xFF5733 };
+  if (points >= 120) return { roleName: "🔥SUPER PRO II", color: 0xFF6F61 };
+  if (points >= 100) return { roleName: "🔥SUPER PRO I", color: 0xFF7F50 };
+  if (points >= 80)  return { roleName: "💪PROFESSIONAL III", color: 0x00CED1 };
+  if (points >= 70)  return { roleName: "💪PROFESSIONAL II", color: 0x20B2AA };
+  if (points >= 60)  return { roleName: "💪PROFESSIONAL I", color: 0x5F9EA0 };
+  if (points >= 50)  return { roleName: "🌟STARS III", color: 0x7CFC00 };
+  if (points >= 40)  return { roleName: "🌟STARS II", color: 0x32CD32 };
+  if (points >= 30)  return { roleName: "🌟STARS I", color: 0x228B22 };
+  if (points >= 20)  return { roleName: "🎯AMATEUR III", color: 0x1E90FF };
+  if (points >= 10)  return { roleName: "🎯AMATEUR II", color: 0x6495ED };
+  if (points >= 5)   return { roleName: "🎯AMATEUR I", color: 0x87CEFA };
+  return { roleName: "🎒NEWBIE", color: 0xAAAAAA };
+}
+
 function personalizeMsg(message, player) {
-  let roleName = getRole(player) == ROLE.SUPER_ADMIN ? "SUPER ADMIN" : getRole(player) == ROLE.ADMIN ? "ADMIN" : "PLAYER";
-  let color = getRole(player) == ROLE.SUPER_ADMIN ? 0xDE3163 : getRole(player) == ROLE.ADMIN ? 0xFFD580 : 0xFFFFFF;
-  let newMessage = `[${roleName} | ${getStats(getAuth(player.id)).points}★] ${player.name.trim()}: ${message}`;
-  //let color = getSetting(player.id).msgColor;
-  //if ( color == "normal" ) color = 0xFFFFFF;
-  if ( message.includes("@") ) {
+  const role = getRole(player);
+  const points = getStats(getAuth(player.id)).points;
+
+  let roleName, color;
+
+  if (role === ROLE.SUPER_ADMIN) {
+    roleName = "👑 SUPER ADMIN";
+    color = 0xDE3163;
+  } else if (role === ROLE.ADMIN) {
+    roleName = "🛠️ ADMIN";
+    color = 0xFFD580;
+  } else {
+    const roleData = getFootballRole(points);
+    roleName = roleData.roleName;
+    color = roleData.color;
+  }
+
+  const newMessage = `[${roleName} | ${points}★] ${player.name.trim()}: ${message}`;
+
+  if (message.includes("@")) {
     for (const _player of room.getPlayerList()) {
-      if ( message.includes(getTag(_player.name)) ) {
-        room.sendAnnouncement(newMessage, _player.id, color, "bold", 2);
-      } else {
-        room.sendAnnouncement(newMessage, _player.id, color);
-      };
-    };
+      const tag = getTag(_player.name);
+      const isTagged = message.includes(tag);
+      room.sendAnnouncement(newMessage, _player.id, color, isTagged ? "bold" : null, isTagged ? 2 : null);
+    }
     return;
-  };
+  }
+
   room.sendAnnouncement(newMessage, null, color);
 }
 
