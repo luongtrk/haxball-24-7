@@ -1,18 +1,3 @@
-const express = require("express");
-const HaxballJS = require("./haxball.js"); // <-- dùng file nội bộ
-// Tạo web server giữ app sống trên Render
-HaxballJS().then(HBInit => {
-  const room = HBInit({
-    token: "thr1.AAAAAGhUCmgeig1EVzFdVw.1agUfqUs5HU",
-    roomName: "[⚽𝘼𝙪𝙩𝙤 𝙍𝙤𝙤𝙢] 5v5 siêu lag (${MODE})",
-    maxPlayers: 30,
-    public: true,
-    noPlayer: true,
-  });
-const app = express();
-app.get("/", (req, res) => res.send("Haxball room is running!"));
-app.listen(process.env.PORT || 3000);
-
 const SUPER_ADMIN_PASSWORD = "taolabo";
 const ADMIN_PASSWORD = "taolame";
 const MODE = "pick"; // can be "rand" or "pick"
@@ -180,14 +165,7 @@ const PENALTY_STADIUM = '{"name":"32MBVRAM Stadium | PEN","width":420,"height":2
 const DISCORD_LINK = "https://discord.gg/HTZD8HA";
 const COMMANDS_TO_VALIDATE = ["discord", "kickafk", "afk", "captains", "unmute", "clearmutes"]; // These commands can cause spam in the chat or bypass the mute
 const INVISIBLE_CHARACTERS = ["	", "ㅤ"];
-HaxballJS().then(HBInit => {
-  const room = HBInit({
-    token: "thr1.AAAAAGhUCmgeig1EVzFdVw.1agUfqUs5HU",
-    roomName: "[⚽𝘼𝙪𝙩𝙤 𝙍𝙤𝙤𝙢] 5v5 siêu lag (${MODE})",
-    maxPlayers: 30,
-    public: true,
-    noPlayer: true,
-  });
+
 class Setting {
   constructor(setting) {
     this.msgColor = "normal";
@@ -447,6 +425,13 @@ var timeouts = {
 var selectedCaptain = null;
 var quotes = [];
 var ballColor = new BallColor();
+
+var room = HBInit({
+  roomName: ROOM_NAME,
+  maxPlayers: 30,
+  playerName: "BLV 32 BuoiBeo",
+  public: PUBLIC,
+});
 room.setTeamsLock(1);
 room.setKickRateLimit(6, 0, 0);
 loadStadium("training").then(_ => { room.startGame() });
@@ -2662,5 +2647,3 @@ room.onTeamsLockChange = function(locked, byPlayer) {
   // Make sure teams are always locked
   !locked && room.setTeamsLock(true);
 }
-   room.onRoomLink = link => console.log("Room link:", link);
-});
