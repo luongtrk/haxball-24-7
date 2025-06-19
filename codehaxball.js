@@ -1,19 +1,5 @@
 const express = require("express");
 const HaxballJS = require("./haxball.js"); // <-- dùng file nội bộ
-
-
-HaxballJS().then(HBInit => {
-  const room = HBInit({
-    token: process.env.TOKEN,
-    roomName: "BLV 32 BuoiBeo Room",
-    maxPlayers: 30,
-    public: true,
-    noPlayer: true,
-  });
-
-  room.onRoomLink = link => console.log("Room is live at:", link);
-});
-
 // Tạo web server giữ app sống trên Render
 const app = express();
 app.get("/", (req, res) => res.send("Haxball room is running!"));
@@ -186,7 +172,14 @@ const PENALTY_STADIUM = '{"name":"32MBVRAM Stadium | PEN","width":420,"height":2
 const DISCORD_LINK = "https://discord.gg/HTZD8HA";
 const COMMANDS_TO_VALIDATE = ["discord", "kickafk", "afk", "captains", "unmute", "clearmutes"]; // These commands can cause spam in the chat or bypass the mute
 const INVISIBLE_CHARACTERS = ["	", "ㅤ"];
-
+HaxballJS().then(HBInit => {
+  const room = HBInit({
+    token: "thr1.AAAAAGhUCmgeig1EVzFdVw.1agUfqUs5HU",
+    roomName: "[⚽𝘼𝙪𝙩𝙤 𝙍𝙤𝙤𝙢] 5v5 siêu lag (${MODE})",
+    maxPlayers: 30,
+    public: true,
+    noPlayer: true,
+  });
 class Setting {
   constructor(setting) {
     this.msgColor = "normal";
