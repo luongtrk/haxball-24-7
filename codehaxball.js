@@ -1,5 +1,6 @@
 const express = require("express");
-const HaxballJS = require("haxball.js");
+const HaxballJS = require("./haxball.js"); // <-- dùng file nội bộ
+
 
 HaxballJS().then(HBInit => {
   const room = HBInit({
