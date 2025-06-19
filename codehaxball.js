@@ -1,4 +1,17 @@
 const express = require("express");
+const HaxballJS = require("haxball.js");
+
+HaxballJS().then(HBInit => {
+  const room = HBInit({
+    token: process.env.TOKEN,
+    roomName: "BLV 32 BuoiBeo Room",
+    maxPlayers: 30,
+    public: true,
+    noPlayer: true,
+  });
+
+  room.onRoomLink = link => console.log("Room is live at:", link);
+});
 
 // Tạo web server giữ app sống trên Render
 const app = express();
@@ -432,13 +445,6 @@ var timeouts = {
 var selectedCaptain = null;
 var quotes = [];
 var ballColor = new BallColor();
-
-var room = HBInit({
-  roomName: ROOM_NAME,
-  maxPlayers: 30,
-  playerName: "BLV 32 BuoiBeo",
-  public: PUBLIC,
-});
 room.setTeamsLock(1);
 room.setKickRateLimit(6, 0, 0);
 loadStadium("training").then(_ => { room.startGame() });
